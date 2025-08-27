@@ -1,0 +1,107 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "SpinASM",
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#punctuation"
+		},
+		{
+			"include": "#literals"
+		},
+		{
+			"include": "#strings"
+		},		
+		{
+			"include": "#chars"
+		},
+		{
+			"include": "#operators"
+		},
+		{
+			"include": "#opcodes"
+		},
+		{
+			"include": "#symbols"
+		},
+		{
+			"include": "#statements"
+		},
+		{
+			"include": "#labels"
+		}
+	],
+	"repository": {
+		"comments": {
+			"patterns": [{
+				"name": "comment.line.semicolon.spn",
+				"match": ";.*$"
+			}]
+		},
+		"punctuation": {
+			"patterns": [{
+				"name": "punctuation.parenthesis.spn",
+				"match": "\\(|\\)"
+			}, {
+				"name": "punctuation.separator.spn",
+				"match": ","
+			}]
+		},
+		"literals": {
+			"patterns": [{
+				"name": "constant.numeric.binary.spn",
+				"match": "%[01]+\\b"	
+			}, {
+				"name": "constant.numeric.hex.spn",
+				"match": "(\\$[0-9A-Fa-f]+\\b)|\\b([0-9A-Fa-f]+h\\b)"
+			}, {
+				"name": "constant.numeric.decimal.spn",
+				"match": "\\b[0-9]+\\b"
+			}, {
+				"name": "constant.language.unnamed-label.spn",
+				"match": ":-+|:\\++"
+			}]
+		},
+		"operators": {
+			"patterns": [{
+				"comment": "Memory operators, # or ^",
+				"name": "keyword.operators.mem.spn",
+				"match": "#|\\^"
+			},{
+				"comment": "Arithmetic, logical, and bitwise operators",
+				"name": "keyword.operators.misc.spn",
+				"match": "=|<>|:=|\\+|-|\\*|/|\\&|~|\\||<<|>>|\\&\\&|\\|\\||!"	
+			}]
+		},
+		"opcodes": {
+			"patterns": [{
+				"comment": "Opcodes",
+				"name": "entity.name.function.opcode.spn",
+				"match": "\\b(?i:sof|and|or|xor|log|exp|skp|rdax|wrax|maxx|mulx|rdfx|wrlx|wrhx|rda|rmpa|wra|wrap|wlds|wldr|jam|cho|rdal|clr|not|absa|ldax)\\b"
+			}]
+		},
+		"statements": {
+			"patterns": [{
+				"comment": "Assembler statements",
+				"name": "storage.type.spn",
+				"match": "\\b(?i:mem|equ)\\b"
+			}]
+		},
+		"symbols": {
+			"patterns": [{
+				"comment": "Registers, e.g. REG0, REG31, POT1, ADCL",
+				"name": "support.constant.spn",
+				"match": "\\b(?i:reg\\d{1,2}|pot\\d|adcl|adcr|dacl|dacr)\\b"
+			}]
+		},
+		"labels": {
+			"patterns": [{
+				"name": "entity.name.label.spn",
+				"match": "^\\s*\\S*:"
+			}]
+		}
+	},
+	"scopeName": "source.spn"
+}
